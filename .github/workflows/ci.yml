@@ -3,7 +3,7 @@ name: Docker Build & Publish
 on:
   push:
     branches:
-      - master
+      - main
 
 permissions:
   packages: write
