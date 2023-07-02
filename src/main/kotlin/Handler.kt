@@ -6,8 +6,6 @@ import dev.kord.common.entity.Snowflake
 import dev.kord.core.Kord
 import dev.kord.core.behavior.GuildBehavior
 import dev.kord.core.behavior.reply
-import dev.kord.core.cache.data.RemovedReactionData
-import dev.kord.core.entity.ReactionEmoji
 import dev.kord.core.event.message.MessageCreateEvent
 import dev.kord.core.on
 import dev.kord.x.emoji.Emojis
