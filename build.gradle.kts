@@ -12,9 +12,9 @@ repositories {
 }
 
 dependencies {
-    implementation("dev.kord:kord-core:0.9.x-SNAPSHOT")
-    implementation("com.squareup.okio:okio-nodefilesystem:3.3.0")
-    implementation("org.jetbrains.kotlin-wrappers", "kotlin-node", "v18.15.11-pre.538")
+    implementation("dev.kord", "kord-core", "0.10.0-SNAPSHOT")
+    implementation("com.squareup.okio", "okio-nodefilesystem", "3.3.0")
+    implementation("org.jetbrains.kotlin-wrappers", "kotlin-node", "18.16.12-pre.583")
     implementation("org.jetbrains.kotlinx", "kotlinx-serialization-json", "1.5.0")
 }
 
