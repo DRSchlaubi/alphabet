@@ -10,6 +10,8 @@ import dev.kord.core.cache.data.RemovedReactionData
 import dev.kord.core.entity.ReactionEmoji
 import dev.kord.core.event.message.MessageCreateEvent
 import dev.kord.core.on
+import dev.kord.x.emoji.Emojis
+import dev.kord.x.emoji.addReaction
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
 
@@ -49,9 +51,9 @@ fun Kord.installBaseHandler() = on<MessageCreateEvent> {
     }
 
     if (isHighScore) {
-        message.addReaction(ReactionEmoji.from(RemovedReactionData(name = "☑\uFE0F")))
+        message.addReaction(Emojis.ballotBoxWithCheck)
     } else {
-        message.addReaction(ReactionEmoji.from(RemovedReactionData(name = "✅")))
+        message.addReaction(Emojis.whiteCheckMark)
     }
 }
 

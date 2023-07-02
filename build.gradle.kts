@@ -13,6 +13,7 @@ repositories {
 
 dependencies {
     implementation("dev.kord", "kord-core", "0.10.0-SNAPSHOT")
+    implementation("dev.kord.x:kordx.emoji:feature-mpp-SNAPSHOT")
     implementation("com.squareup.okio", "okio-nodefilesystem", "3.3.0")
     implementation("org.jetbrains.kotlin-wrappers", "kotlin-node", "18.16.12-pre.583")
     implementation("org.jetbrains.kotlinx", "kotlinx-serialization-json", "1.5.0")
