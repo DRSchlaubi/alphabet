@@ -12,6 +12,7 @@ import dev.kord.x.emoji.Emojis
 import dev.kord.x.emoji.addReaction
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
+import kotlin.math.abs
 
 private val locks = mutableMapOf<Snowflake, Mutex>()
 
@@ -23,6 +24,7 @@ fun Kord.installBaseHandler() = on<MessageCreateEvent> {
     if (message.author?.isBot != false || message.channel.id != settings.channel) return@on
     val received = message.content.uppercase()
     if (!received.all(Char::isLetter)) return@on
+    if (abs((settings.currentChar?.length ?: 0) - received.length) >= 3) return@on
     val isHighScore = withLock(guild) {
         if (settings.lastUser == message.author?.id || received != settings.currentChar.next
         ) {

@@ -1,3 +1,6 @@
+import org.jetbrains.kotlin.gradle.targets.js.yarn.YarnLockMismatchReport
+import org.jetbrains.kotlin.gradle.targets.js.yarn.YarnLockStoreTask
+
 plugins {
     kotlin("multiplatform") version "1.9.0"
     kotlin("plugin.serialization") version "1.9.0"
@@ -28,5 +31,11 @@ kotlin {
                 implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.5.1")
             }
         }
+    }
+}
+
+tasks {
+    named<YarnLockStoreTask>("kotlinStoreYarnLock") {
+        yarnLockMismatchReport = provider { YarnLockMismatchReport.WARNING }
     }
 }
