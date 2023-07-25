@@ -77,7 +77,7 @@ private val nextFunction = DeepRecursiveFunction<String, String> {
 }
 
 private suspend inline fun <R : Any> withLock(guild: GuildBehavior, action: () -> R): R {
-    val mutex = locks.getOrPut(guild.id) { Mutex() }
+    val mutex = locks.getOrPut(guild.id, ::Mutex)
 
     return mutex.withLock(action = action)
 }

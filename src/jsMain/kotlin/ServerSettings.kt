@@ -1,12 +1,16 @@
+@file:OptIn(ExperimentalSerializationApi::class)
+
 package dev.schlaubi.alphabet
 
 import dev.kord.common.entity.Snowflake
 import dev.kord.core.behavior.GuildBehavior
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
+import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.Serializable
-import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
+import kotlinx.serialization.json.okio.decodeFromBufferedSource
+import kotlinx.serialization.json.okio.encodeToBufferedSink
 import okio.NodeJsFileSystem
 import okio.Path.Companion.toPath
 import okio.buffer
@@ -34,24 +38,23 @@ suspend fun GuildBehavior.retrieveSettings() = cache[id] ?: fsRetrieveSettings()
 private suspend fun GuildBehavior.fsRetrieveSettings() = withLock(this) {
     val path = toLocation()
     if (!fs.exists(path)) return@withLock ServerSettings()
-    val content = fs.source(toLocation()).use {
+    fs.source(toLocation()).use {
         it.buffer().use { buffer ->
-            buffer.readUtf8()
+            json.decodeFromBufferedSource<ServerSettings>(buffer)
         }
     }
-
-    json.decodeFromString<ServerSettings>(content)
 }
 
 suspend fun GuildBehavior.saveSettings(settings: ServerSettings) = withLock(this) {
-    val content = json.encodeToString(settings)
     val path = toLocation()
     val parent = path.parent ?: error("Parent was null for some reason")
     if (!fs.exists(parent)) {
         fs.createDirectories(parent)
     }
-    fs.write(toLocation()) {
-        writeUtf8(content)
+    fs.sink(toLocation()).use {
+        it.buffer().use { buffer ->
+            json.encodeToBufferedSink(settings, buffer)
+        }
     }
     cache[id] = settings
 }
