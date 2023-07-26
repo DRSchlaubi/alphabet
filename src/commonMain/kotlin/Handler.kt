@@ -12,6 +12,7 @@ import dev.kord.x.emoji.Emojis
 import dev.kord.x.emoji.addReaction
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
+import kotlin.jvm.JvmName
 import kotlin.math.abs
 
 private val locks = mutableMapOf<Snowflake, Mutex>()
@@ -60,6 +61,7 @@ fun Kord.installBaseHandler() = on<MessageCreateEvent> {
 val Char.next
     get() = (code + 1).toChar()
 
+@get:JvmName("nextNullable")
 val String?.next get() = this?.next ?: "A"
 
 val String.next: String
