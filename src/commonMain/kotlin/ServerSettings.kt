@@ -11,13 +11,13 @@ import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.okio.decodeFromBufferedSource
 import kotlinx.serialization.json.okio.encodeToBufferedSink
-import okio.NodeJsFileSystem
+import okio.FileSystem
 import okio.Path.Companion.toPath
 import okio.buffer
 import okio.use
 
 private val locks = mutableMapOf<Snowflake, Mutex>()
-private val fs = NodeJsFileSystem
+internal expect val fs: FileSystem
 private val json = Json
 private val cache = mutableMapOf<Snowflake, ServerSettings>()
 val startingChar = null

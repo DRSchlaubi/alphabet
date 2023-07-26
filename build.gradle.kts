@@ -2,6 +2,7 @@ import org.jetbrains.kotlin.gradle.targets.js.yarn.YarnLockMismatchReport
 import org.jetbrains.kotlin.gradle.targets.js.yarn.YarnLockStoreTask
 
 plugins {
+    application
     kotlin("multiplatform") version "1.9.0"
     kotlin("plugin.serialization") version "1.9.0"
 }
@@ -15,6 +16,7 @@ repositories {
 }
 
 kotlin {
+    jvm()
     js(IR) {
         nodejs {
             binaries.executable()
@@ -22,16 +24,26 @@ kotlin {
     }
 
     sourceSets {
+        commonMain {
+            dependencies {
+                implementation(libs.kord.core)
+                implementation(libs.kordx.emoji)
+                implementation(libs.okio)
+                implementation(libs.kotlinx.serialization.json.okio)
+            }
+        }
+
         named("jsMain") {
             dependencies {
-                implementation("dev.kord:kord-core:0.10.0-SNAPSHOT")
-                implementation("dev.kord.x:kordx.emoji:feature-mpp-SNAPSHOT")
-                implementation("com.squareup.okio:okio-nodefilesystem:3.4.0")
-                implementation("org.jetbrains.kotlin-wrappers:kotlin-node:18.16.12-pre.594")
-                implementation("org.jetbrains.kotlinx:kotlinx-serialization-json-okio:1.5.1")
+                implementation(libs.okio.nodefilesystem)
+                implementation(libs.nodejs)
             }
         }
     }
+}
+
+application {
+    mainClass = "dev.schlaubi.alphabet.MainKt"
 }
 
 tasks {

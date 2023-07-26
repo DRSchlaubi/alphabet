@@ -1,0 +1,16 @@
+[versions]
+kotlin = "1.9.0"
+okio = "3.4.0"
+
+[libraries]
+kord-core = { group = "dev.kord", name = "kord-core", version = "0.10.0" }
+kordx-emoji = { group = "dev.kord.x", name = "kordx.emoji", version = "feature-mpp-SNAPSHOT" }
+kotlinx-serialization-json-okio = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json-okio", version = "1.5.1" }
+nodejs = { group = "org.jetbrains.kotlin-wrappers", name = "kotlin-node", version = "18.16.12-pre.601" }
+
+okio = { group = "com.squareup.okio", name = "okio", version.ref = "okio" }
+okio-nodefilesystem = { group = "com.squareup.okio", name = "okio-nodefilesystem", version.ref = "okio" }
+
+[plugins]
+kotlin-multiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
+kotlin-plugin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
