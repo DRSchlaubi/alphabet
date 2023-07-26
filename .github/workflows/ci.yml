@@ -27,7 +27,7 @@ jobs:
       - name: Build
         uses: gradle/gradle-build-action@v2
         with:
-          arguments: compileProductionExecutableKotlinJs
+          arguments: compileProductionExecutableKotlinJs jsPublicPackageJson
       - name: Extract Docker metadata
         id: meta
         uses: docker/metadata-action@v4.4.0
