@@ -3,8 +3,8 @@ import org.jetbrains.kotlin.gradle.targets.js.yarn.YarnLockStoreTask
 
 plugins {
     application
-    kotlin("multiplatform") version "1.9.0"
-    kotlin("plugin.serialization") version "1.9.0"
+    alias(libs.plugins.kotlin.multiplatform)
+    alias(libs.plugins.kotlin.plugin.serialization)
 }
 
 group = "dev.schlaubi"
