@@ -24,7 +24,7 @@ fun Kord.installBaseHandler() = on<MessageCreateEvent> {
     val settings = guild.retrieveSettings()
     if (message.author?.isBot != false || message.channel.id != settings.channel) return@on
     val received = message.content.uppercase()
-    if (!received.all(Char::isLetter)) return@on
+    if (received.isBlank() || !received.all(Char::isLetter)) return@on
     if (abs((settings.currentChar?.length ?: 0) - received.length) >= 3) return@on
     val isHighScore = withLock(guild) {
         if (settings.lastUser == message.author?.id || received != settings.currentChar.next
