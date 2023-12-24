@@ -1,4 +1,4 @@
-FROM oven/bun
+FROM oven/bun:alpine
 WORKDIR /usr/app
 
 COPY build/compileSync/js/main/productionExecutable/kotlin .
