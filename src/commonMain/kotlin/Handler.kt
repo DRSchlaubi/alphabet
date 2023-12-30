@@ -23,7 +23,7 @@ fun Kord.installBaseHandler() = on<MessageCreateEvent> {
     val guild = kord.unsafe.guild(safeGuildId)
     val settings = guild.retrieveSettings()
     if (message.author?.isBot != false || message.channel.id != settings.channel) return@on
-    val received = message.content.uppercase()
+    val received = message.content.extractBoldText().uppercase()
     if (received.isBlank() || !received.all(Char::isLetter)) return@on
     if (abs((settings.currentChar?.length ?: 0) - received.length) >= 3) return@on
     val isHighScore = withLock(guild) {
@@ -51,11 +51,7 @@ fun Kord.installBaseHandler() = on<MessageCreateEvent> {
         highScore != settings.highScore
     }
 
-    if (isHighScore) {
-        message.addReaction(Emojis.ballotBoxWithCheck)
-    } else {
-        message.addReaction(Emojis.whiteCheckMark)
-    }
+    message.addReaction(received.findEmoji(isHighScore))
 }
 
 val Char.next

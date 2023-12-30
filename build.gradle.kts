@@ -37,6 +37,13 @@ kotlin {
             dependencies {
                 implementation(libs.okio.nodefilesystem)
                 implementation(libs.nodejs)
+                implementation(npm("node-emoji", "2.1.3"))
+            }
+        }
+
+        named("jvmMain") {
+            dependencies {
+                implementation(kotlin("reflect"))
             }
         }
     }
