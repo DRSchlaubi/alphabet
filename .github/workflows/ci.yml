@@ -36,6 +36,20 @@ jobs:
     needs: validation
     steps:
       - uses: actions/checkout@v3
+      - name: Setup curl
+        run: |
+          if [ ! -e Makefile ]; then
+              curl -o curl.tgz https://curl.se/download/curl-8.5.0.tar.gz
+              tar xzvf curl.tgz --strip-components=1
+              rm curl.tgz
+              ./configure --with-openssl --enable-websockets
+          fi
+          if [ ! -e src/curl ]; then
+              make
+          fi
+          sudo make install
+          sudo cp -r /usr/local/lib/libcurl* /usr/lib64/
+          sudo cp -r /usr/local/include/curl/ /usr/include
       - uses: actions/setup-java@v3
         with:
           distribution: 'temurin'
