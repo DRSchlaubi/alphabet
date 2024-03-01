@@ -13,7 +13,7 @@ fun String.extractBoldText(): String {
     return matches.joinToString("") { it.groupValues[1] }
 }
 
-expect fun findCountryFlag(name: String): DiscordEmoji?
+fun findCountryFlag(name: String): DiscordEmoji? = DiscordEmoji.findByNameOrNull(name)
 
 fun String.findEmoji(isHighScore: Boolean): DiscordEmoji {
     return findCountryFlag(this)

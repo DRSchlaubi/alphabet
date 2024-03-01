@@ -1,9 +1,8 @@
-FROM node:alpine
-WORKDIR /usr/app
+FROM ghcr.io/kordlib/docker:main
 
-COPY build/compileSync/js/main/productionExecutable/kotlin .
-COPY build/js/packages/alphabet/package.json .
-RUN npm i
+WORKDIR /usr/app
+COPY build/bin/linuxX64/releaseExecutable/alphabet.kexe /usr/app/bot
+
 LABEL org.opencontainers.image.source = "https://github.com/DRSchlaubi/alphabet"
 
-ENTRYPOINT ["node", "/usr/app/alphabet.js"]
+ENTRYPOINT ["/usr/app/bot"]

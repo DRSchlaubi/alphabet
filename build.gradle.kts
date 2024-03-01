@@ -1,5 +1,7 @@
+import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
 import org.jetbrains.kotlin.gradle.targets.js.yarn.YarnLockMismatchReport
 import org.jetbrains.kotlin.gradle.targets.js.yarn.YarnLockStoreTask
+import org.jetbrains.kotlin.konan.target.Family
 
 plugins {
     application
@@ -11,6 +13,7 @@ group = "dev.schlaubi"
 version = "1.0-SNAPSHOT"
 
 repositories {
+    maven("https://europe-west3-maven.pkg.dev/mik-music/kord")
     mavenCentral()
     maven("https://oss.sonatype.org/content/repositories/snapshots")
 }
@@ -22,6 +25,24 @@ kotlin {
             binaries.executable()
         }
     }
+
+    mingwX64()
+    macosArm64()
+    macosX64()
+    linuxX64()
+    linuxArm64()
+
+    targets.withType<KotlinNativeTarget> {
+        binaries.executable {
+            entryPoint = "dev.schlaubi.alphabet.launcher.main"
+            if (konanTarget.family == Family.LINUX) {
+                linkerOpts("--as-needed", "--defsym=isnan=isnan")
+                freeCompilerArgs =
+                    freeCompilerArgs + listOf("-Xoverride-konan-properties=linkerGccFlags=-lgcc -lgcc_eh -lc")
+            }
+        }
+    }
+
 
     sourceSets {
         commonMain {
@@ -37,13 +58,6 @@ kotlin {
             dependencies {
                 implementation(libs.okio.nodefilesystem)
                 implementation(libs.nodejs)
-                implementation(npm("node-emoji", "2.1.3"))
-            }
-        }
-
-        named("jvmMain") {
-            dependencies {
-                implementation(kotlin("reflect"))
             }
         }
     }
