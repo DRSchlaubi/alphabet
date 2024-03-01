@@ -35,11 +35,6 @@ kotlin {
     targets.withType<KotlinNativeTarget> {
         binaries.executable {
             entryPoint = "dev.schlaubi.alphabet.launcher.main"
-            if (konanTarget.family == Family.LINUX) {
-                linkerOpts("--as-needed", "--defsym=isnan=isnan")
-                freeCompilerArgs =
-                    freeCompilerArgs + listOf("-Xoverride-konan-properties=linkerGccFlags=-lgcc -lgcc_eh -lc")
-            }
         }
     }
 
