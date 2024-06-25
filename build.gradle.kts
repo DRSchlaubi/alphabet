@@ -1,7 +1,4 @@
 import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
-import org.jetbrains.kotlin.gradle.targets.js.yarn.YarnLockMismatchReport
-import org.jetbrains.kotlin.gradle.targets.js.yarn.YarnLockStoreTask
-import org.jetbrains.kotlin.konan.target.Family
 
 plugins {
     application
@@ -30,7 +27,7 @@ kotlin {
     macosArm64()
     macosX64()
     linuxX64()
-    linuxArm64()
+//    linuxArm64()
 
     targets.withType<KotlinNativeTarget> {
         binaries.executable {
@@ -38,20 +35,18 @@ kotlin {
         }
     }
 
-
     sourceSets {
         commonMain {
             dependencies {
                 implementation(libs.kord.core)
                 implementation(libs.kordx.emoji)
-                implementation(libs.okio)
-                implementation(libs.kotlinx.serialization.json.okio)
+                implementation(libs.kotlinx.io)
+                implementation(libs.kotlinx.serialization.json.io)
             }
         }
 
         named("jsMain") {
             dependencies {
-                implementation(libs.okio.nodefilesystem)
                 implementation(libs.nodejs)
             }
         }
@@ -60,10 +55,4 @@ kotlin {
 
 application {
     mainClass = "dev.schlaubi.alphabet.MainKt"
-}
-
-tasks {
-    named<YarnLockStoreTask>("kotlinStoreYarnLock") {
-        yarnLockMismatchReport = provider { YarnLockMismatchReport.WARNING }
-    }
 }

@@ -8,7 +8,6 @@ import dev.kord.core.behavior.GuildBehavior
 import dev.kord.core.behavior.reply
 import dev.kord.core.event.message.MessageCreateEvent
 import dev.kord.core.on
-import dev.kord.x.emoji.Emojis
 import dev.kord.x.emoji.addReaction
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
