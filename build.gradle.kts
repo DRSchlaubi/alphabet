@@ -43,6 +43,7 @@ kotlin {
                 implementation(libs.kordx.emoji)
                 implementation(libs.kotlinx.io)
                 implementation(libs.kotlinx.serialization.json.io)
+                implementation(libs.kotlinx.datetime)
             }
         }
 

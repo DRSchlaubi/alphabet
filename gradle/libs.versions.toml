@@ -6,6 +6,7 @@ kotlinx-io = "0.5.3"
 kord-core = { group = "dev.kord", name = "kord-core", version = "feature-native-SNAPSHOT" }
 kordx-emoji = { group = "dev.kord.x", name = "emoji", version = "feature-mpp-SNAPSHOT" }
 kotlinx-serialization-json-io = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json-io", version = "1.7.2" }
+kotlinx-datetime = { group = "org.jetbrains.kotlinx", name = "kotlinx-datetime", version = "0.6.1" }
 nodejs = { group = "org.jetbrains.kotlin-wrappers", name = "kotlin-node", version = "22.5.4-pre.805" }
 
 kotlinx-io = { group = "org.jetbrains.kotlinx", name = "kotlinx-io-core", version.ref = "kotlinx-io" }
