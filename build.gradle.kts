@@ -1,7 +1,6 @@
 import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
 
 plugins {
-    application
     alias(libs.plugins.kotlin.multiplatform)
     alias(libs.plugins.kotlin.plugin.serialization)
 }
@@ -9,10 +8,12 @@ plugins {
 group = "dev.schlaubi"
 version = "1.0-SNAPSHOT"
 
-repositories {
-    maven("https://europe-west3-maven.pkg.dev/mik-music/kord")
-    mavenCentral()
-    maven("https://oss.sonatype.org/content/repositories/snapshots")
+allprojects {
+    repositories {
+        maven("https://europe-west3-maven.pkg.dev/mik-music/kord")
+        mavenCentral()
+        maven("https://oss.sonatype.org/content/repositories/snapshots")
+    }
 }
 
 kotlin {
@@ -51,8 +52,4 @@ kotlin {
             }
         }
     }
-}
-
-application {
-    mainClass = "dev.schlaubi.alphabet.MainKt"
 }
