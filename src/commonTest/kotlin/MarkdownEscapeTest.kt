@@ -30,7 +30,7 @@ class MarkdownEscapeTest {
         assertEquals("hallo", result)
     }
     @Test
-    fun testWierdlyBoldText() {
+    fun testWeirdlyBoldText() {
         val input = "diese Vorlesung dauert zu lange. Das ist ***q**ualvoll "
         val result = input.extractBoldText()
         assertEquals("q", result)
