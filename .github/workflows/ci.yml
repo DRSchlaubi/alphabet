@@ -40,7 +40,7 @@ jobs:
           build-scan-publish: true
           build-scan-terms-of-use-url: 'https://gradle.com/terms-of-service'
           build-scan-terms-of-use-agree: 'yes'
-      - run: ./gradlew linkReleaseExecutableLinuxX64
+      - run: ./gradlew linkReleaseExecutableLinuxX64 linkReleaseExecutableLinuxArm64
       - name: Extract Docker metadata
         id: meta
         uses: docker/metadata-action@v6
@@ -56,6 +56,10 @@ jobs:
           registry: ${{ env.REGISTRY }}
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
+      - run: |
+          mkdir out
+          cp build/bin/linux-amd64/releaseExecutable/alphabet.kexe out/alphabet-amd64.kexe
+          cp build/bin/linux-arm64/releaseExecutable/alphabet.kexe out/alphabet-arm64.kexe
       - name: Build and push Docker image
         id: build-and-push
         uses: docker/build-push-action@v7
@@ -64,5 +68,6 @@ jobs:
           push: ${{ github.event_name != 'pull_request' }}
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
+          platforms: linux/amd64, linux/arm64
           cache-from: type=gha
           cache-to: type=gha,mode=max
