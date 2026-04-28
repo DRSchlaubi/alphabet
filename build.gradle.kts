@@ -12,7 +12,8 @@ allprojects {
     repositories {
         maven("https://europe-west3-maven.pkg.dev/mik-music/kord")
         mavenCentral()
-        maven("https://oss.sonatype.org/content/repositories/snapshots")
+        maven("https://snapshots.kord.dev")
+        maven("https://snapshots-repo.kordex.dev")
     }
 }
 
@@ -26,9 +27,8 @@ kotlin {
 
     mingwX64()
     macosArm64()
-    macosX64()
     linuxX64()
-//    linuxArm64()
+    linuxArm64()
 
     targets.withType<KotlinNativeTarget> {
         binaries.executable {
