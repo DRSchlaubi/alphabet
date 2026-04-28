@@ -8,8 +8,11 @@ kordx-emoji = { group = "dev.kord.x", name = "emoji", version = "feature-mpp-SNA
 kotlinx-serialization-json-io = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json-io", version = "1.7.2" }
 kotlinx-datetime = { group = "org.jetbrains.kotlinx", name = "kotlinx-datetime", version = "0.8.0-rc02" }
 nodejs = { group = "org.jetbrains.kotlin-wrappers", name = "kotlin-node", version = "2026.4.13-24.12.2" }
+markdown = { group = "org.jetbrains", name = "markdown", version = "0.7.3" }
 
 kotlinx-io = { group = "org.jetbrains.kotlinx", name = "kotlinx-io-core", version.ref = "kotlinx-io" }
+
+junit-jupiter-engine = { group = "org.junit.jupiter", name = "junit-jupiter-engine", version = "6.1.0-RC1" }
 
 [plugins]
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }

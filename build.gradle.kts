@@ -1,3 +1,6 @@
+@file:OptIn(ExperimentalKotlinGradlePluginApi::class)
+
+import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
 import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
 
 plugins {
@@ -18,7 +21,13 @@ allprojects {
 }
 
 kotlin {
-    jvm()
+    jvm {
+        testRuns.all {
+            executionTask.configure {
+                useJUnitPlatform()
+            }
+        }
+    }
     js(IR) {
         nodejs {
             binaries.executable()
@@ -37,17 +46,32 @@ kotlin {
     }
 
     sourceSets {
-        commonMain {
+        dependencies {
+            implementation(libs.kord.core)
+            implementation(libs.kordx.emoji)
+            implementation(libs.kotlinx.io)
+            implementation(libs.kotlinx.serialization.json.io)
+            implementation(libs.kotlinx.datetime)
+            implementation(libs.markdown)
+
+            implementation(kotlin("test-common"))
+            implementation(kotlin("test-annotations-common"))
+        }
+
+        jvmTest {
             dependencies {
-                implementation(libs.kord.core)
-                implementation(libs.kordx.emoji)
-                implementation(libs.kotlinx.io)
-                implementation(libs.kotlinx.serialization.json.io)
-                implementation(libs.kotlinx.datetime)
+                implementation(kotlin("test-junit5"))
+                runtimeOnly(libs.junit.jupiter.engine)
             }
         }
 
-        named("jsMain") {
+        jsTest {
+            dependencies {
+                implementation(kotlin("test-js"))
+            }
+        }
+
+        jsMain {
             dependencies {
                 implementation(libs.nodejs)
             }
