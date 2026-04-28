@@ -24,6 +24,12 @@ class MarkdownEscapeTest {
         assertEquals("hal", result)
     }
     @Test
+    fun testDoublePartiallyBoldText() {
+        val input = "**hal**lo **lo**ha"
+        val result = input.extractBoldText()
+        assertEquals("hallo", result)
+    }
+    @Test
     fun testWierdlyBoldText() {
         val input = "diese Vorlesung dauert zu lange. Das ist ***q**ualvoll "
         val result = input.extractBoldText()
