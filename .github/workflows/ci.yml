@@ -58,8 +58,8 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
       - run: |
           mkdir out
-          cp build/bin/linux-amd64/releaseExecutable/alphabet.kexe out/alphabet-amd64.kexe
-          cp build/bin/linux-arm64/releaseExecutable/alphabet.kexe out/alphabet-arm64.kexe
+          cp build/bin/linuxX64/releaseExecutable/alphabet.kexe out/alphabet-amd64.kexe
+          cp build/bin/linuxArm64/releaseExecutable/alphabet.kexe out/alphabet-arm64.kexe
       - name: Build and push Docker image
         id: build-and-push
         uses: docker/build-push-action@v7
