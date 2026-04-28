@@ -1,6 +1,6 @@
 plugins {
     application
-    alias(libs.plugins.kotlin.jvm)
+    kotlin("jvm")
 }
 
 dependencies {
