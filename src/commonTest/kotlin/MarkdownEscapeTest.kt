@@ -35,4 +35,10 @@ class MarkdownEscapeTest {
         val result = input.extractBoldText()
         assertEquals("q", result)
     }
+    @Test
+    fun testBoldAndCursiveText() {
+        val input = "**D**ie sind allerdings _Eur**o**pes favorite airline_"
+        val result = input.extractBoldText()
+        assertEquals("Do", result)
+    }
 }
